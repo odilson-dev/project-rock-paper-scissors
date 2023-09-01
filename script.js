@@ -19,7 +19,7 @@ function playRound(playerSelection, computerSelection){
         } else if (computerSelection == "scissors"){
             return ["You win, the rock beats the scissors", 1];
         } else{
-            return ["You both choosed the same thing", 2];
+            return ["You both choosed the same thing", null];
         }
     } else if (playerSelection == "paper"){
         if (computerSelection == "scissors"){
@@ -27,7 +27,7 @@ function playRound(playerSelection, computerSelection){
         } else if (computerSelection == "rock"){
             return ["You win, the paper beats the rock", 1];
         } else{
-            return ["You both choosed the same thing", 2];
+            return ["You both choosed the same thing", null];
         }
     } else if (playerSelection == "scissors"){
         if (computerSelection == "rock"){
@@ -35,41 +35,51 @@ function playRound(playerSelection, computerSelection){
         } else if (computerSelection == "paper"){
             return ["You win, the scissors beats the paper", 1];
         } else{
-            return ["You both choosed the same thing\nPlease try again...", 2];
+            return ["You both choosed the same thing\nPlease try again...", null];
         }
     } else{
-        return ["Dear user, your choice is not correct! \nPlease try again...", 2];
+        return ["Dear user, your choice is not correct! \nPlease try again...", null];
     }
 
 }
 
-function game(){
-    let rounds = 1;
-    let score = 0;
-    while (rounds <= 5){
-        let playerchoice = prompt("Welcome dear player, Please choose between: 'rock', 'paper', 'scissors'");
+const div = document.createElement("div");
 
-        let computerchoice = getComputerChoice();
+const body = document.querySelector('body');
+let playerScore = document.createElement("div");
+let playerScoreInt = 0;
 
-        let result = playRound(playerchoice, computerchoice);
-        if (result[1] == 1){
-            console.log(result[0]);
-            score++;
-        } else if(result[1] == 0){
-            console.log(result[0]);
-        } else if (result[1] == 2){
-            console.log(result[0]);
-            continue;
-        }
-        console.log(`Computer choice => ${computerchoice}
-Playerchoice => ${playerchoice}
-Round: ${rounds}`);
-        rounds++;
+let pcScore = document.createElement("div");
+let pcScoreInt = 0
+
+let endGameStatus = document.createElement("div");
+
+
+window.addEventListener("click", (e) => {
+    let computerChoice = getComputerChoice();
+
+    let resultOfRound = playRound(e.target.id, computerChoice);
+    div.textContent = resultOfRound[0];
+
+    console.log(e);
+    if(resultOfRound[1] === 1) playerScoreInt += 1;
+    else if(resultOfRound[1] === 0) pcScoreInt += 1
+    body.appendChild(div);
+
+    playerScore.textContent = `Your Score : ${playerScoreInt}`;
+    pcScore.textContent = `PC's Score : ${pcScoreInt}`;
+
+    body.appendChild(playerScore);
+    body.appendChild(pcScore);
+    
+    if(playerScoreInt == 5){
+        endGameStatus.textContent = "Congratulations!!!  You won!";
+        body.appendChild(endGameStatus);
+    } else if (pcScoreInt == 5) {
+        endGameStatus.textContent = "Game Over! You lose!"
+        body.appendChild(endGameStatus);
     }
 
-    console.log(`GAME OVER
-Your score is ${score}/5`);
-}
 
-
-game();
+    
+})
