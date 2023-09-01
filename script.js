@@ -90,6 +90,7 @@ buttons.forEach(button => button.addEventListener("click", (e) => {
 
     if(playerScoreInt == 5){
         endGameStatus.textContent = "Congratulations!!!  You won!";
+        endGameStatus.style.textAlign = "center";
         body.appendChild(endGameStatus);
         buttons.forEach(button => button.disabled = true)
         
