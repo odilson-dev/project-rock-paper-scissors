@@ -1,0 +1,17 @@
+body{
+    background-color: cadetblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    font-size: 30px;
+    text-align: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    width: 200px;
+}

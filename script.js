@@ -46,11 +46,25 @@ function playRound(playerSelection, computerSelection){
 const div = document.createElement("div");
 
 const body = document.querySelector('body');
-let playerScore = document.createElement("div");
-let playerScoreInt = 0;
 
-let pcScore = document.createElement("div");
+
+let playerScore = document.querySelector(".playerscore");
+let playerScoreInt = 0;
+playerScore.textContent = `Your score: ${playerScoreInt}`;
+
+
+
+let pcScore = document.querySelector(".pcscore");
 let pcScoreInt = 0
+pcScore.textContent = `PC's score: ${pcScoreInt}`;
+
+
+let pcchoice = document.querySelector(".pcchoice");
+
+let status = document.querySelector(".status");
+ 
+
+
 
 let endGameStatus = document.createElement("div");
 
@@ -61,27 +75,29 @@ let buttons = document.querySelectorAll("button");
 
 buttons.forEach(button => button.addEventListener("click", (e) => {
     let computerChoice = getComputerChoice();
-
+    
     let resultOfRound = playRound(e.target.id, computerChoice);
-    div.textContent = resultOfRound[0];
+    
 
-    console.log(e);
+    pcchoice.textContent =`The PC's choice is ${computerChoice}`;
+    status.textContent = resultOfRound[0]
+    
     if(resultOfRound[1] === 1) playerScoreInt += 1;
     else if(resultOfRound[1] === 0) pcScoreInt += 1
-    body.appendChild(div);
-
-    playerScore.textContent = `Your Score : ${playerScoreInt}`;
-    pcScore.textContent = `PC's Score : ${pcScoreInt}`;
-
-    body.appendChild(playerScore);
-    body.appendChild(pcScore);
     
+    playerScore.textContent = `Your score: ${playerScoreInt}`;
+    pcScore.textContent = `PC's score: ${pcScoreInt}`;
+
     if(playerScoreInt == 5){
         endGameStatus.textContent = "Congratulations!!!  You won!";
         body.appendChild(endGameStatus);
+        buttons.forEach(button => button.disabled = true)
+        
     } else if (pcScoreInt == 5) {
         endGameStatus.textContent = "Game Over! You lose!"
         body.appendChild(endGameStatus);
+        buttons.forEach(button => button.disabled = true)
+        
     }
 
 
