@@ -67,6 +67,9 @@ let status = document.querySelector(".status");
 
 
 let endGameStatus = document.createElement("div");
+endGameStatus.style.fontSize = "50px";
+endGameStatus.style.marginTop = "100px";
+endGameStatus.style.textAlign = "center";
 
 let buttons = document.querySelectorAll("button");
 
