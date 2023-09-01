@@ -54,8 +54,12 @@ let pcScoreInt = 0
 
 let endGameStatus = document.createElement("div");
 
+let buttons = document.querySelectorAll("button");
 
-window.addEventListener("click", (e) => {
+
+
+
+buttons.forEach(button => button.addEventListener("click", (e) => {
     let computerChoice = getComputerChoice();
 
     let resultOfRound = playRound(e.target.id, computerChoice);
@@ -82,4 +86,4 @@ window.addEventListener("click", (e) => {
 
 
     
-})
+}))
